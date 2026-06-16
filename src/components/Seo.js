@@ -3,9 +3,11 @@ import PropTypes from "prop-types"
 import { Helmet } from "react-helmet"
 import { useLocation } from "@reach/router"
 import { useStaticQuery, graphql } from "gatsby"
+import { useI18next } from "gatsby-plugin-react-i18next"
 
 const SEO = ({ title, description, image }) => {
   const { pathname } = useLocation()
+  const { language } = useI18next()
   const { site } = useStaticQuery(query)
 
   const {
@@ -16,15 +18,27 @@ const SEO = ({ title, description, image }) => {
     defaultImage,
   } = site.siteMetadata
 
+  const cleanPath = pathname.replace(/^\/(de|pl|en)(?=\/|$)/, "") || "/"
+  const canonicalPath = language === "de" ? `/de${cleanPath}` : cleanPath
+  const withSiteUrl = path => `${siteUrl}${path}`.replace(/\/$/, "/")
+
   const seo = {
     title: title || defaultTitle,
     description: description || defaultDescription,
     image: `${siteUrl}${image || defaultImage}`,
-    siteUrl: `${siteUrl}${pathname}`,
+    siteUrl: withSiteUrl(canonicalPath),
   }
 
   return (
-    <Helmet title={seo.title} titleTemplate={titleTemplate}>
+    <Helmet
+      title={seo.title}
+      titleTemplate={titleTemplate}
+      htmlAttributes={{ lang: language }}
+    >
+      <link rel="canonical" href={seo.siteUrl} />
+      <link rel="alternate" hrefLang="pl" href={withSiteUrl(cleanPath)} />
+      <link rel="alternate" hrefLang="de" href={withSiteUrl(`/de${cleanPath}`)} />
+      <link rel="alternate" hrefLang="x-default" href={withSiteUrl(cleanPath)} />
       <meta name="description" content={seo.description} />
       <meta
         name="google-site-verification"

@@ -10,9 +10,9 @@ import Seo from "../../components/Seo"
 
 const CategoryTemplate = ({ data, location }) => {
   const { description, title, image } = data.airtable.data
-  console.log(data.airtable.data)
   const nextCategory = (title, { nodes } = data.allAirtable) => {
     let nextCategory = ""
+    nodes = nodes.filter(node => node.data.title !== "Schody")
     for (let i = 0; i < nodes.length; i++) {
       if (title === nodes[i].data.title) {
         if (i === nodes.length - 1) {
@@ -25,6 +25,7 @@ const CategoryTemplate = ({ data, location }) => {
 
   const previousCategory = (title, { nodes } = data.allAirtable) => {
     let previousCategory = ""
+    nodes = nodes.filter(node => node.data.title !== "Schody")
     for (let i = 0; i < nodes.length; i++) {
       if (title === nodes[i].data.title) {
         if (i === 0) {

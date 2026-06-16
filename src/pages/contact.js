@@ -14,10 +14,8 @@ const Contact = ({ data }) => {
   return (
     <>
       <Seo
-        title={t("Kontakt")}
-        description={t(
-          "Zapraszamy do konktaktu telefonicznego, mailowego lub poprzez formularz."
-        )}
+        title={t("seo.contact.title")}
+        description={t("seo.contact.description")}
       />
       <Layout data={data}>
         <Wrapper>

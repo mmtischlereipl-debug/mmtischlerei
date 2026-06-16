@@ -19,10 +19,8 @@ const Offer = ({ data }) => {
   return (
     <>
       <Seo
-        title={t("Oferta")}
-        description={t(
-          "Garderoby, Meble biurowe, Meble kuchenne, Meble na poddasze, Meble łazienkowe, Schody oraz usługi stolarskie."
-        )}
+        title={t("seo.offer.title")}
+        description={t("seo.offer.description")}
       />
       <Layout data={data}>
         <Wrapper>
@@ -45,7 +43,7 @@ const Offer = ({ data }) => {
           </div>
           <Title title="Meble na wymiar" />
           <Project />
-          <Category categories={categories} />
+          <Category categories={categories.filter(category => category.data.title !== "Schody")} />
           {/* <Title title="Usługi stolarskie" /> */}
         </Wrapper>
       </Layout>

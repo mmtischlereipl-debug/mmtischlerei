@@ -11,10 +11,8 @@ const IndexPage = ({ data }) => {
   return (
     <>
       <Seo
-        title="Home"
-        description={t(
-          "Stolarnia zlokalizowana w Gubinie oferująca meble na wymiar i usługi stolarskie. Najlepsza jakość materiałów i szybkość wykonania."
-        )}
+        title={t("seo.home.title")}
+        description={t("seo.home.description")}
       />
       <Layout data={data}>
         <Hero data={data} />
