@@ -7,10 +7,10 @@ const siteUrl = "https://www.mmtischlerei.pl"
 module.exports = {
   siteMetadata: {
     title: `M&M Tischlerei`,
-    description: `Meble na wymiar i usługi stolarskie. Najlepsza jakość materiałów i szybkość wykonania`,
+    description: `Meble na wymiar, kuchnie, szafy, garderoby, meble łazienkowe i zabudowy stolarskie dla klientów z Polski i Niemiec.`,
     titleTemplate: `%s | M&M Tischlerei`,
-    siteUrl: "https://www.mmtischlerei.pl",
-    image: `furniture.jpg`,
+    siteUrl,
+    image: `/furniture.jpg`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -25,6 +25,9 @@ module.exports = {
           "/en/404.html",
           "/de/404/",
           "/en/404/",
+          "/offer/schody/",
+          "/de/offer/schody/",
+          "/en/offer/schody/",
         ],
         resolveSiteUrl: () => siteUrl,
         query: `
@@ -87,10 +90,10 @@ module.exports = {
       resolve: `gatsby-plugin-react-i18next`,
       options: {
         localeJsonSourceName: `locale`, // name given to `gatsby-source-filesystem` plugin.
-        languages: [`pl`, `de`, `en`],
+        languages: [`pl`, `de`],
         defaultLanguage: `pl`,
         // if you are using Helmet, you must include siteUrl, and make sure you add http:https
-        siteUrl: `https://localhost:8000`,
+        siteUrl,
         // you can pass any i18next options
         i18nextOptions: {
           interpolation: {
@@ -104,10 +107,6 @@ module.exports = {
             matchPath: "/:lang?/blog/:uid",
             getLanguageFromPath: true,
             excludeLanguages: ["es"],
-          },
-          {
-            matchPath: "/preview",
-            languages: ["en"],
           },
         ],
       },
