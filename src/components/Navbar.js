@@ -11,7 +11,7 @@ const Navbar = ({ toggleSidebar }) => {
   return (
     <Wrapper>
       <div className="nav-header">
-        <Link to="/">
+        <Link to="/" aria-label="M&M Tischlerei - Home">
           <StaticImage
             src="../images/logo.jpg"
             width={75}
@@ -22,15 +22,15 @@ const Navbar = ({ toggleSidebar }) => {
         <div className="nav-contact">
           <div className="nav-contact-option">
             <BsFillTelephoneFill size={24} />
-            <p>+48 791 756 101</p>
+            <a href="tel:+48791756101">+48 791 756 101</a>
           </div>
           <div className="nav-contact-option">
             <BsFillEnvelopeFill size={24} />
-            <p>mmtischlereipl@gmail.com</p>
+            <a href="mailto:mmtischlereipl@gmail.com">mmtischlereipl@gmail.com</a>
           </div>
         </div>
       </div>
-      <button className="btn-menu" onClick={toggleSidebar}>
+      <button className="btn-menu" onClick={toggleSidebar} aria-label="Open menu">
         <AiOutlineMenu className="burger" />
       </button>
       <div className="nav-links">
@@ -42,6 +42,7 @@ const Navbar = ({ toggleSidebar }) => {
             </Link>
           )
         })}
+        <Link to="/contact/#quote" className="btn quote"><Trans>Bezpłatna wycena</Trans></Link>
       </div>
       <div className="lang">
         <Language />
@@ -132,6 +133,14 @@ const Wrapper = styled.nav`
         color: var(--clr-primary-brown);
         box-shadow: 0px 2px #b08968;
       }
+    }
+    .quote {
+      background: var(--clr-primary-brown);
+      color: white;
+      padding: 0.65rem 0.9rem;
+      border-radius: var(--border-radius);
+      white-space: nowrap;
+      &:hover { color: white; background: #7f5539; box-shadow: none; }
     }
   }
   .lang {

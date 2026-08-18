@@ -4,6 +4,7 @@ import Footer from "./Footer"
 import Sidebar from "./Sidebar"
 import { useState } from "react"
 import { motion } from "framer-motion"
+import QuickContact from "./QuickContact"
 
 const Layout = ({ children, data }) => {
   const [isOpen, setIsOpen] = useState(false)
@@ -21,6 +22,7 @@ const Layout = ({ children, data }) => {
       >
         {children}
       </motion.main>
+      <QuickContact />
       <Footer data={data} />
     </>
   )

@@ -20,7 +20,7 @@ const Lang = () => {
 
   return (
     <Wrapper>
-      <button className="btn" onClick={() => setIsOpen(!isOpen)}>
+      <button className="btn" onClick={() => setIsOpen(!isOpen)} aria-label="Change language" aria-expanded={isOpen}>
         {context.language === "pl" ? (
           <img src={pl} alt="pl" className="img" />
         ) : context.language === "de" ? (

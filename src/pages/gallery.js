@@ -1,6 +1,6 @@
 //i18next-extract-mark-ns-start gallery-page
 
-import React from "react"
+import React, { useContext, useState } from "react"
 import { useTranslation, Trans } from "gatsby-plugin-react-i18next"
 import { graphql } from "gatsby"
 import Layout from "../components/Layout"
@@ -9,13 +9,15 @@ import Title from "../components/Title"
 import Seo from "../components/Seo"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import GalleryImg from "../components/GalleryImg"
-import { useContext } from "react"
 import { GatsbyContext } from "../context/context"
 
 const Gallery = ({ data }) => {
   const { nodes: gallery } = data.allAirtableGallery
   const { t } = useTranslation()
   const { selectImage, handleSelectImage } = useContext(GatsbyContext)
+  const [filter, setFilter] = useState("all")
+  const categories = ["all", ...new Set(gallery.map(item => item.data.title).filter(Boolean))]
+  const visibleGallery = filter === "all" ? gallery : gallery.filter(item => item.data.title === filter)
 
   return (
     <>
@@ -23,11 +25,18 @@ const Gallery = ({ data }) => {
       <Layout data={data}>
         <Wrapper>
           <Title title="Nasze realizacje" />
+          <div className="filters" aria-label={t("Filtr realizacji")}>
+            {categories.map(category => (
+              <button key={category} type="button" className={filter === category ? "active" : ""} onClick={() => setFilter(category)} aria-pressed={filter === category}>
+                {category === "all" ? t("Wszystkie") : <Trans>{category}</Trans>}
+              </button>
+            ))}
+          </div>
           {selectImage === null ? null : (
             <GalleryImg dataSelected={selectImage} data={gallery} />
           )}
           <section className="gallery-container">
-            {gallery.map(item => {
+            {visibleGallery.map(item => {
               const { title, image } = item.data
               const { id } = item
 
@@ -100,7 +109,7 @@ const Wrapper = styled.section`
   grid-gap: 1rem;
 
   .gallery-container {
-    width: 70%;
+    width: 100%;
     display: grid;
     grid-gap: 1rem;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -147,6 +156,9 @@ const Wrapper = styled.section`
       }
     }
   }
+  .filters { display: flex; flex-wrap: wrap; justify-content: center; gap: .6rem; margin-bottom: 1rem; }
+  .filters button { min-height: 44px; padding: .55rem .9rem; border: 1px solid var(--clr-primary-brown); border-radius: 999px; background: white; color: var(--clr-grey-2); font: inherit; font-weight: 700; cursor: pointer; }
+  .filters button.active { background: var(--clr-primary-brown); color: white; }
 `
 
 export default Gallery

@@ -67,6 +67,16 @@ body {
   font-family: -apple-system,"Poppins",sans-serif;
   margin: 0rem auto;
 }
+:focus-visible {
+  outline: 3px solid #7f5539;
+  outline-offset: 3px;
+}
+button, a, input, select, textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+@media screen and (max-width: 480px) {
+  body { padding-bottom: 4.75rem; }
+}
 ul {
   list-style-type: none;
 }

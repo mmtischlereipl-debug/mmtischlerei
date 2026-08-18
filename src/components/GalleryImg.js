@@ -3,7 +3,7 @@ import styled from "styled-components"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import { GatsbyContext } from "../context/context"
 import { motion, AnimatePresence } from "framer-motion"
-import { Trans } from "gatsby-plugin-react-i18next"
+import { Trans, Link } from "gatsby-plugin-react-i18next"
 import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from "react-icons/md"
 
 const imgVariants = {
@@ -81,9 +81,10 @@ const GalleryImg = ({ dataSelected, data }) => {
   }
 
   return (
-    <Wrapper>
+    <Wrapper role="dialog" aria-modal="true" aria-label={title}>
       <Background onClick={() => handleSelectImage(null)} />
       <div className="img-container">
+        <button className="close" onClick={() => handleSelectImage(null)} aria-label="Close">×</button>
         <AnimatePresence custom={direction} initial={false}>
           <motion.div
             className="img-motion"
@@ -119,6 +120,7 @@ const GalleryImg = ({ dataSelected, data }) => {
               <h3>
                 <Trans>{title}</Trans>
               </h3>
+              <Link to={`/contact/?project=${encodeURIComponent(title)}#quote`}><Trans>Chcę podobny projekt</Trans></Link>
             </div>
           </motion.div>
         </AnimatePresence>
@@ -128,6 +130,7 @@ const GalleryImg = ({ dataSelected, data }) => {
           variants={btnVariants}
           whileTap="tap"
           whileHover="hover"
+          aria-label="Previous image"
         >
           <MdKeyboardArrowLeft size={96} className="icon" />
         </motion.button>
@@ -137,6 +140,7 @@ const GalleryImg = ({ dataSelected, data }) => {
           variants={btnVariants}
           whileTap="tap"
           whileHover="hover"
+          aria-label="Next image"
         >
           <MdKeyboardArrowRight size={96} className="icon" />
         </motion.button>
@@ -163,6 +167,7 @@ const Wrapper = styled.div`
     place-items: center;
     position: relative;
     border-radius: var(--border-radius);
+    .close { position: absolute; right: .5rem; top: .5rem; z-index: 2010; width: 44px; height: 44px; border: 0; border-radius: 50%; background: rgba(0,0,0,.75); color: white; font-size: 2rem; cursor: pointer; }
 
     @media screen and (min-width: 640px) {
       width: 25rem;
@@ -204,6 +209,7 @@ const Wrapper = styled.div`
         margin: 0;
         color: var(--clr-white);
       }
+      a { color: white; font-weight: 700; text-decoration: underline; }
     }
 
     .btn {

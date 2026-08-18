@@ -2,7 +2,7 @@ import React from "react"
 import styled from "styled-components"
 import pageLinks from "../constants/links"
 import { BsXLg } from "react-icons/bs"
-import { Link } from "gatsby"
+import { Link } from "gatsby-plugin-react-i18next"
 import { motion, AnimatePresence } from "framer-motion"
 import { Trans } from "gatsby-plugin-react-i18next"
 import Social from "../components/Social"
@@ -17,7 +17,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
           key="sidebar"
           exit={{ opacity: 0, x: 1000 }}
         >
-          <button className="btn" onClick={toggleSidebar}>
+          <button className="btn" onClick={toggleSidebar} aria-label="Close menu">
             <BsXLg className="exit-icon" />
           </button>
 
@@ -27,13 +27,14 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
                 const { id, url, text } = link
                 return (
                   <li key={id}>
-                    <Link to={url}>
+                    <Link to={url} onClick={toggleSidebar}>
                       <Trans>{text}</Trans>
                     </Link>
                   </li>
                 )
               })}
             </ul>
+            <Link className="quote" to="/contact/#quote" onClick={toggleSidebar}><Trans>Bezpłatna wycena</Trans></Link>
             <Social />
           </div>
         </Wrapper>
@@ -77,6 +78,7 @@ const Wrapper = styled(motion.aside)`
       letter-spacing: var(--spacing);
     }
   }
+  .quote { display: block; text-align: center; background: var(--clr-primary-brown); color: white; padding: 0.8rem; border-radius: var(--border-radius); font-size: 1.25rem; }
 `
 
 export default Sidebar

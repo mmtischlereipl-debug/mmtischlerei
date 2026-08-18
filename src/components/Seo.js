@@ -19,7 +19,7 @@ const SEO = ({ title, description, image }) => {
   } = site.siteMetadata
 
   const cleanPath = pathname.replace(/^\/(de|pl|en)(?=\/|$)/, "") || "/"
-  const canonicalPath = language === "de" ? `/de${cleanPath}` : cleanPath
+  const canonicalPath = language === "pl" ? cleanPath : `/${language}${cleanPath}`
   const withSiteUrl = path => `${siteUrl}${path}`.replace(/\/$/, "/")
 
   const seo = {
@@ -38,6 +38,7 @@ const SEO = ({ title, description, image }) => {
       <link rel="canonical" href={seo.siteUrl} />
       <link rel="alternate" hrefLang="pl" href={withSiteUrl(cleanPath)} />
       <link rel="alternate" hrefLang="de" href={withSiteUrl(`/de${cleanPath}`)} />
+      <link rel="alternate" hrefLang="en" href={withSiteUrl(`/en${cleanPath}`)} />
       <link rel="alternate" hrefLang="x-default" href={withSiteUrl(cleanPath)} />
       <meta name="description" content={seo.description} />
       <meta
@@ -55,6 +56,19 @@ const SEO = ({ title, description, image }) => {
       )}
 
       {seo.image && <meta property="og:image" content={seo.image} />}
+      <meta property="og:type" content="website" />
+      <meta property="og:locale" content={language === "de" ? "de_DE" : language === "en" ? "en_GB" : "pl_PL"} />
+      <meta name="twitter:card" content="summary_large_image" />
+      <script type="application/ld+json">{JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        name: "M&M Tischlerei",
+        url: siteUrl,
+        telephone: "+48 791 756 101",
+        email: "mmtischlereipl@gmail.com",
+        address: { "@type": "PostalAddress", streetAddress: "Kolonia Wałowice 74b", postalCode: "66-620", addressLocality: "Gubin", addressCountry: "PL" },
+        sameAs: ["https://www.facebook.com/MM-Tischlerei-106100201919094/"]
+      })}</script>
     </Helmet>
   )
 }

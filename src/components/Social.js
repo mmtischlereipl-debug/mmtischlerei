@@ -6,7 +6,7 @@ const Social = () => {
     <Wrapper>
       {socialLinks.map(link => {
         return (
-          <a href={link.url} key={link.id} className="social-link">
+          <a href={link.url} key={link.id} className="social-link" target="_blank" rel="noreferrer" aria-label={link.url.includes("facebook") ? "Facebook" : "Instagram"}>
             {link.icon}
           </a>
         )
