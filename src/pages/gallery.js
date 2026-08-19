@@ -12,7 +12,9 @@ import GalleryImg from "../components/GalleryImg"
 import { GatsbyContext } from "../context/context"
 
 const Gallery = ({ data }) => {
-  const { nodes: gallery } = data.allAirtableGallery
+    const gallery = data.allAirtableGallery.nodes.filter(
+    item => item?.data?.title && item?.data?.image?.localFiles?.[0]
+  )
   const { t } = useTranslation()
   const { selectImage, handleSelectImage } = useContext(GatsbyContext)
   const [filter, setFilter] = useState("all")
