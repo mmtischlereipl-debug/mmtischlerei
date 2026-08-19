@@ -7,9 +7,11 @@ import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import { Trans, useTranslation } from "gatsby-plugin-react-i18next"
 import slugify from "slugify"
 import Seo from "../../components/Seo"
+import { getOfferImage } from "../../constants/offerImages"
 
 const CategoryTemplate = ({ data, location }) => {
   const { description, title, image } = data.airtable.data
+  const offerImage = getOfferImage(title)
   const nextCategory = (title, { nodes } = data.allAirtable) => {
     let nextCategory = ""
     nodes = nodes.filter(node => node.data.title !== "Schody")
@@ -66,7 +68,11 @@ const CategoryTemplate = ({ data, location }) => {
             </div>
           </article>
           <section className="img-wrapper">
-            {image.localFiles.map((item, index) => {
+            {offerImage ? (
+              <div className="div-0">
+                <img src={offerImage} alt={title} className="img" />
+              </div>
+            ) : image.localFiles.map((item, index) => {
               return (
                 <div className={`div-${index}`} key={index}>
                   <GatsbyImage
@@ -185,6 +191,7 @@ const Wrapper = styled.section`
     .img {
       height: 100%;
       width: 100%;
+      object-fit: cover;
       border-radius: var(--border-radius);
     }
 
