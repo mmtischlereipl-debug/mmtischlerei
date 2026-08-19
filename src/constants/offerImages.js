@@ -10,6 +10,7 @@ const normalize = value =>
     .toLocaleLowerCase("pl")
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
+    .replace(/ł/g, "l")
 
 export const getOfferImage = title => {
   const normalizedTitle = normalize(title || "")
