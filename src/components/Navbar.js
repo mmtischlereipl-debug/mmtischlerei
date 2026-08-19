@@ -1,7 +1,6 @@
 import React from "react"
 import styled from "styled-components"
-import { StaticImage } from "gatsby-plugin-image"
-import { BsFillTelephoneFill, BsFillEnvelopeFill } from "react-icons/bs"
+import { BsFillTelephoneFill } from "react-icons/bs"
 import pageLinks from "../constants/links"
 import { AiOutlineMenu } from "react-icons/ai"
 import { Trans, Link } from "gatsby-plugin-react-i18next"
@@ -11,22 +10,13 @@ const Navbar = ({ toggleSidebar }) => {
   return (
     <Wrapper>
       <div className="nav-header">
-        <Link to="/" aria-label="M&M Tischlerei - Home">
-          <StaticImage
-            src="../images/logo.jpg"
-            width={75}
-            height={75}
-            alt="logo"
-          />
+        <Link to="/" aria-label="M&M Tischlerei - Home" className="wordmark">
+          <strong>M&M</strong><span>Tischlerei</span>
         </Link>
         <div className="nav-contact">
           <div className="nav-contact-option">
             <BsFillTelephoneFill size={24} />
             <a href="tel:+48791756101">+48 791 756 101</a>
-          </div>
-          <div className="nav-contact-option">
-            <BsFillEnvelopeFill size={24} />
-            <a href="mailto:mmtischlereipl@gmail.com">mmtischlereipl@gmail.com</a>
           </div>
         </div>
       </div>
@@ -52,26 +42,26 @@ const Navbar = ({ toggleSidebar }) => {
 }
 
 const Wrapper = styled.nav`
-  display: grid;
-  margin: 1.5rem auto 2rem auto;
-  width: 95%;
-  max-width: var(--max-width);
+  display: grid; position:relative; z-index:100;
+  margin: 0 auto;
+  padding: 1rem 4%;
+  width: 100%;
+  background:#11100f;color:white;
   grid-template-columns: 1fr;
   align-items: center;
   @media screen and (min-width: 980px) {
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 1fr 2fr auto;
   }
 
   .nav-header {
     display: flex;
     flex-direction: row;
-    gap: 1rem;
-    padding-bottom: 10px;
-    border-bottom: var(--border-bottom);
+    gap: 2rem;align-items:center;
+    .wordmark{display:flex;align-items:baseline;gap:.5rem;color:white}.wordmark strong{font-family:Georgia,serif;font-size:1.85rem;font-weight:400}.wordmark span{text-transform:uppercase;letter-spacing:.2em;font-size:.62rem;color:#b77554}
 
     .nav-contact {
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       justify-content: space-around;
 
       .nav-contact-option {
@@ -81,7 +71,7 @@ const Wrapper = styled.nav`
 
         a,
         p {
-          font-size: 0.7rem;
+          font-size: 0.8rem;color:white;
           margin: 0;
           font-weight: bold;
 
@@ -103,7 +93,7 @@ const Wrapper = styled.nav`
     .burger {
       width: 2rem;
       height: auto;
-      color: var(--clr-primary-brown);
+      color: #b77554;
     }
     @media screen and (min-width: 980px) {
       display: none;
@@ -114,10 +104,10 @@ const Wrapper = styled.nav`
 
     @media screen and (min-width: 980px) {
       display: flex;
-      gap: 1rem;
+      gap: 1.5rem;
       letter-spacing: 0.2rem;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-end;
       font-size: 0.8rem;
     }
 
@@ -130,15 +120,15 @@ const Wrapper = styled.nav`
       transition: var(--transition);
 
       &:hover {
-        color: var(--clr-primary-brown);
+        color: #d18b67;
         box-shadow: 0px 2px #b08968;
       }
     }
     .quote {
-      background: var(--clr-primary-brown);
+      background: #b77554;
       color: white;
       padding: 0.65rem 0.9rem;
-      border-radius: var(--border-radius);
+      border-radius: 0;
       white-space: nowrap;
       &:hover { color: white; background: #7f5539; box-shadow: none; }
     }
@@ -148,8 +138,7 @@ const Wrapper = styled.nav`
     top: 4rem;
     right: 1rem;
     @media screen and (min-width: 980px) {
-      top: 1rem;
-      right: 1rem;
+      position:static;
     }
   }
 `

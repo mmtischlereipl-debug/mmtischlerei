@@ -1,92 +1,95 @@
-import { StaticImage } from "gatsby-plugin-image"
 import React from "react"
 import styled from "styled-components"
-import { Link, Trans, useTranslation } from "gatsby-plugin-react-i18next"
-import { FaRulerCombined, FaTools, FaTruck, FaComments } from "react-icons/fa"
+import { Link, Trans } from "gatsby-plugin-react-i18next"
+import { FaArrowRight, FaRulerCombined, FaPencilRuler, FaTools, FaTruck } from "react-icons/fa"
+import heroKitchen from "../images/modern-kitchen-hero.png"
+import wardrobe from "../images/inspiration-wardrobe.png"
+import livingRoom from "../images/inspiration-living-room.png"
+import bathroom from "../images/inspiration-bathroom.png"
 
 const services = [
-  ["Kuchnie na wymiar", "kitchens"],
-  ["Szafy i garderoby", "wardrobes"],
-  ["Meble łazienkowe", "bathroom"],
-  ["Meble dla firm i biur", "business"],
+  ["01", "Kuchnie na wymiar", "Funkcjonalne, piękne i dopracowane."],
+  ["02", "Garderoby i szafy", "Maksimum miejsca, perfekcyjny porządek."],
+  ["03", "Zabudowy wnęk", "Idealnie dopasowane do przestrzeni."],
+  ["04", "Meble do salonu i biura", "Styl i komfort na co dzień."],
 ]
 
-const Hero = () => {
-  const { t } = useTranslation()
-  return (
+const Hero = () => (
   <Wrapper>
     <section className="hero">
-      <StaticImage src="../images/furniture.jpg" layout="fullWidth" placeholder="blurred" className="hero-image" alt={t("Meble kuchenne na wymiar M&M Tischlerei")} />
-      <div className="overlay" />
+      <img src={heroKitchen} alt="Nowoczesna kuchnia na wymiar w drewnie i graficie" />
+      <div className="hero-shade" />
       <div className="hero-copy">
-        <p className="eyebrow"><Trans>Indywidualne rozwiązania dla Twojego wnętrza</Trans></p>
-        <h1><Trans>Meble na wymiar — od projektu po montaż</Trans></h1>
-        <p><Trans>Projektujemy, wykonujemy, transportujemy i montujemy meble dopasowane do Twojej przestrzeni.</Trans></p>
+        <p className="eyebrow"><Trans>Meble na wymiar · projekt · produkcja · montaż</Trans></p>
+        <h1><Trans>Meble tworzone dla Twojej przestrzeni</Trans></h1>
+        <p className="lead"><Trans>Od projektu po perfekcyjny montaż</Trans></p>
+        <p><Trans>Tworzymy wnętrza, które łączą precyzję rzemiosła, nowoczesny design i trwałość na lata.</Trans></p>
         <div className="actions">
-          <Link className="primary" to="/contact/#quote"><Trans>Bezpłatna wycena</Trans></Link>
-          <a className="secondary" href="https://wa.me/48791756101" target="_blank" rel="noreferrer">WhatsApp</a>
+          <Link className="primary" to="/contact/#quote"><Trans>Umów bezpłatną wycenę</Trans><FaArrowRight /></Link>
+          <a className="phone" href="tel:+48791756101">+48 791 756 101</a>
         </div>
       </div>
     </section>
-    <section className="section" aria-labelledby="services-title">
-      <div className="section-heading"><p className="eyebrow"><Trans>Oferta</Trans></p><h2 id="services-title"><Trans>Meble stworzone dla Twojej przestrzeni</Trans></h2></div>
-      <div className="service-grid">
-        {services.map(([label, slug]) => <Link className="service-card" to="/offer/" key={slug}><h3><Trans>{label}</Trans></h3><span><Trans>Zobacz ofertę</Trans> →</span></Link>)}
+
+    <section className="intro section">
+      <div className="intro-copy">
+        <p className="eyebrow">M&M Tischlerei</p>
+        <h2><Trans>Rzemiosło. Design. Precyzja.</Trans></h2>
+        <p><Trans>Projektujemy zabudowy, które wykorzystują każdy centymetr i naturalnie wpisują się w rytm Twojego domu.</Trans></p>
+        <Link className="text-link" to="/offer/"><Trans>Poznaj naszą ofertę</Trans><FaArrowRight /></Link>
+      </div>
+      <div className="intro-images">
+        <img className="large" src={livingRoom} alt="Nowoczesna zabudowa salonu" />
+        <img src={wardrobe} alt="Garderoba na wymiar" />
       </div>
     </section>
-    <section className="trust section" aria-labelledby="trust-title">
-      <div className="section-heading"><p className="eyebrow"><Trans>Dlaczego M&M Tischlerei?</Trans></p><h2 id="trust-title"><Trans>Kompleksowo i na wymiar</Trans></h2></div>
-      <div className="trust-grid">
-        <article><FaRulerCombined /><h3><Trans>Indywidualny projekt</Trans></h3></article>
-        <article><FaTools /><h3><Trans>Sprawdzone materiały i okucia</Trans></h3></article>
-        <article><FaTruck /><h3><Trans>Transport i profesjonalny montaż</Trans></h3></article>
-        <article><FaComments /><h3><Trans>Obsługa PL / DE / EN</Trans></h3></article>
+
+    <section className="services section">
+      <div className="service-image"><img src={wardrobe} alt="Detal zabudowy garderoby" /></div>
+      <div className="service-content">
+        <p className="eyebrow"><Trans>Nasza oferta</Trans></p>
+        <h2><Trans>Meble, które pracują dla Ciebie.</Trans></h2>
+        <div className="service-list">
+          {services.map(([number, title, description]) => (
+            <Link to="/offer/" key={number} className="service-row">
+              <span>{number}</span><div><h3><Trans>{title}</Trans></h3><p><Trans>{description}</Trans></p></div><FaArrowRight />
+            </Link>
+          ))}
+        </div>
       </div>
     </section>
-    <section className="brands section">
-      <div><p className="eyebrow"><Trans>Jakość wykonania</Trans></p><h2><Trans>Pracujemy na sprawdzonych markach i systemach</Trans></h2></div>
-      <ul aria-label="Brands"><li>Festool</li><li>Bosch Professional</li><li>SOLA</li><li>Blum</li><li>Häfele</li><li>Hettich</li></ul>
+
+    <section className="projects section">
+      <div className="section-title"><div><p className="eyebrow"><Trans>Galeria inspiracji</Trans></p><h2><Trans>Pomysły na nowoczesne wnętrza</Trans></h2></div><Link className="text-link" to="/gallery/"><Trans>Zobacz wszystkie</Trans><FaArrowRight /></Link></div>
+      <div className="project-grid">
+        <Link to="/gallery/"><img src={heroKitchen} alt="Nowoczesna kuchnia" /><span><Trans>Kuchnie</Trans></span></Link>
+        <Link to="/gallery/"><img src={livingRoom} alt="Zabudowa salonu" /><span><Trans>Salony</Trans></span></Link>
+        <Link to="/gallery/"><img src={bathroom} alt="Meble łazienkowe" /><span><Trans>Łazienki</Trans></span></Link>
+      </div>
     </section>
+
+    <section className="process section">
+      <div><p className="eyebrow"><Trans>Nasz proces</Trans></p><h2><Trans>Jak pracujemy</Trans></h2></div>
+      <div className="process-grid">
+        <article><FaRulerCombined /><b>01</b><h3><Trans>Rozmowa i pomiary</Trans></h3><p><Trans>Poznajemy Twoje potrzeby i przestrzeń.</Trans></p></article>
+        <article><FaPencilRuler /><b>02</b><h3><Trans>Projekt i wizualizacja</Trans></h3><p><Trans>Tworzymy rozwiązania dopasowane do Ciebie.</Trans></p></article>
+        <article><FaTools /><b>03</b><h3><Trans>Produkcja</Trans></h3><p><Trans>Precyzyjne wykonanie w naszej pracowni.</Trans></p></article>
+        <article><FaTruck /><b>04</b><h3><Trans>Montaż</Trans></h3><p><Trans>Czysto, terminowo i bez kompromisów.</Trans></p></article>
+      </div>
+    </section>
+
     <section className="final-cta section">
-      <div><p className="eyebrow"><Trans>Masz pomysł na projekt?</Trans></p><h2><Trans>Prześlij wymiary, zdjęcia lub szkic</Trans></h2></div>
-      <Link className="primary" to="/contact/#quote"><Trans>Poproś o wycenę</Trans></Link>
+      <div><p className="eyebrow"><Trans>Twój projekt zaczyna się tutaj</Trans></p><h2><Trans>Umów bezpłatną wycenę</Trans></h2><p><Trans>Opowiedz nam o swojej przestrzeni. Przygotujemy indywidualną propozycję.</Trans></p></div>
+      <div><Link className="primary" to="/contact/#quote"><Trans>Porozmawiajmy</Trans><FaArrowRight /></Link><a className="phone" href="tel:+48791756101">+48 791 756 101</a></div>
     </section>
   </Wrapper>
-  )
-}
+)
 
 const Wrapper = styled.div`
-  max-width: var(--max-width); width: 95%; margin: 0 auto 5rem;
-  .hero { position: relative; min-height: 34rem; border-radius: 10px; overflow: hidden; display: flex; align-items: center; }
-  .hero-image, .overlay { position: absolute; inset: 0; width: 100%; height: 100%; }
-  .overlay { z-index: 1; background: linear-gradient(90deg, rgba(20,24,27,.88) 0%, rgba(20,24,27,.58) 55%, rgba(20,24,27,.1) 100%); }
-  .hero-copy { z-index: 2; position: relative; color: white; max-width: 780px; padding: clamp(2rem, 7vw, 6rem); }
-  .hero-copy h1 { font-size: clamp(2.25rem, 6vw, 4.6rem); line-height: 1.05; }
-  .hero-copy p { color: white; font-size: clamp(1rem, 2vw, 1.25rem); max-width: 650px; }
-  .eyebrow { color: var(--clr-primary-brown); text-transform: uppercase; letter-spacing: .13em; font-weight: 800; font-size: .8rem; }
-  .actions { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 2rem; }
-  .primary, .secondary { min-height: 48px; display: inline-flex; align-items: center; justify-content: center; padding: .8rem 1.25rem; border-radius: var(--border-radius); font-weight: 800; }
-  .primary { background: var(--clr-primary-brown); color: white; }
-  .primary:hover, .primary:focus-visible { background: #7f5539; }
-  .secondary { color: white; border: 2px solid rgba(255,255,255,.75); }
-  .section { margin-top: clamp(4rem, 8vw, 7rem); }
-  .section-heading { max-width: 750px; margin-bottom: 2rem; }
-  .section-heading h2, .brands h2, .final-cta h2 { font-size: clamp(1.8rem, 4vw, 3rem); line-height: 1.15; }
-  .service-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
-  .service-card { min-height: 190px; padding: 1.5rem; background: white; border-top: 4px solid var(--clr-primary-brown); border-radius: var(--border-radius); box-shadow: var(--light-shadow); display: flex; flex-direction: column; justify-content: space-between; transition: var(--transition); }
-  .service-card:hover, .service-card:focus-visible { box-shadow: var(--dark-shadow); transform: translateY(-3px); }
-  .service-card span { color: #7f5539; font-weight: 700; }
-  .trust { background: var(--clr-secondary-brown); border-radius: 10px; padding: clamp(1.5rem, 5vw, 4rem); }
-  .trust-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
-  .trust article { background: rgba(255,255,255,.55); padding: 1.25rem; border-radius: var(--border-radius); }
-  .trust svg { font-size: 1.7rem; color: #7f5539; margin-bottom: 1rem; }
-  .trust h3 { font-size: 1rem; line-height: 1.35; }
-  .brands { display: grid; grid-template-columns: 1fr 1.3fr; gap: 2rem; align-items: center; }
-  .brands ul { display: grid; grid-template-columns: repeat(3, 1fr); gap: .75rem; }
-  .brands li { background: white; padding: 1rem; border-radius: var(--border-radius); text-align: center; font-weight: 800; color: var(--clr-grey-3); }
-  .final-cta { background: var(--clr-grey-1); color: white; border-radius: 10px; padding: clamp(1.5rem, 5vw, 4rem); display: flex; align-items: center; justify-content: space-between; gap: 2rem; }
-  @media (max-width: 900px) { .service-grid, .trust-grid { grid-template-columns: repeat(2, 1fr); } .brands { grid-template-columns: 1fr; } }
-  @media (max-width: 560px) { .hero { min-height: 31rem; } .overlay { background: rgba(20,24,27,.72); } .service-grid, .trust-grid, .brands ul { grid-template-columns: 1fr; } .final-cta { align-items: flex-start; flex-direction: column; } .final-cta .primary { width: 100%; } }
+  background:#f4f1ec;color:#181715;
+  .section{max-width:var(--max-width);width:92%;margin:0 auto;padding:clamp(4.5rem,8vw,8rem) 0}.eyebrow{text-transform:uppercase;letter-spacing:.18em;font-size:.72rem;font-weight:700;color:#b77554;margin-bottom:1rem}.hero{min-height:clamp(560px,78vh,820px);position:relative;display:flex;align-items:center;overflow:hidden}.hero>img,.hero-shade{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.hero-shade{background:linear-gradient(90deg,rgba(8,8,8,.94) 0%,rgba(8,8,8,.7) 43%,rgba(8,8,8,.08) 78%)}.hero-copy{position:relative;z-index:1;width:92%;max-width:var(--max-width);margin:auto;color:white;padding:6rem 0}.hero-copy>*{max-width:690px}.hero h1,.section h2{font-family:Georgia,serif;font-weight:400;letter-spacing:-.035em}.hero h1{font-size:clamp(3rem,7vw,6.6rem);line-height:.98;margin-bottom:1.25rem}.hero .lead{font-size:clamp(1.25rem,2.2vw,2rem);color:white}.hero-copy p{color:#ddd;font-size:1.08rem}.actions,.final-cta>div:last-child{display:flex;align-items:center;flex-wrap:wrap;gap:1.25rem;margin-top:2rem}.primary{display:inline-flex;align-items:center;gap:.8rem;background:#b77554;color:white;padding:1rem 1.35rem;font-weight:700;transition:.25s}.primary:hover{background:#ca8663;transform:translateY(-2px)}.phone{color:inherit;font-weight:700}.section h2{font-size:clamp(2.4rem,5vw,5rem);line-height:1.02}.intro{display:grid;grid-template-columns:.75fr 1.75fr;gap:clamp(2rem,6vw,7rem);align-items:center}.intro-copy p:not(.eyebrow){font-size:1.05rem;max-width:460px}.text-link{display:inline-flex;align-items:center;gap:.7rem;color:#9d5f41;font-weight:700;border-bottom:1px solid #b77554;padding-bottom:.35rem}.intro-images{display:grid;grid-template-columns:1.6fr .75fr;gap:1rem}.intro-images img{width:100%;height:420px;object-fit:cover}.intro-images img:not(.large){height:280px;align-self:end}.services{max-width:none;width:100%;display:grid;grid-template-columns:1fr 2fr;background:#121110;color:white;padding:0}.service-image img{height:100%;min-height:620px;object-fit:cover}.service-content{padding:clamp(3rem,7vw,7rem)}.service-content h2{max-width:600px}.service-list{margin-top:2.5rem}.service-row{display:grid;grid-template-columns:60px 1fr 24px;gap:1rem;align-items:center;color:white;border-top:1px solid #403b36;padding:1.15rem 0}.service-row>span{font-family:Georgia,serif;font-size:1.7rem;color:#b77554}.service-row h3{font-size:1rem;margin:0}.service-row p{font-size:.8rem;color:#aaa;margin:.25rem 0 0}.section-title{display:flex;align-items:end;justify-content:space-between;gap:2rem}.project-grid{display:grid;grid-template-columns:1.15fr 1.15fr .7fr;gap:.8rem;margin-top:2rem}.project-grid a{position:relative;overflow:hidden;min-height:430px}.project-grid img{height:100%;object-fit:cover;transition:.5s}.project-grid a:hover img{transform:scale(1.025)}.project-grid span{position:absolute;left:1rem;bottom:1rem;background:rgba(12,12,12,.78);color:white;padding:.6rem .8rem}.process{display:grid;grid-template-columns:.7fr 2fr;gap:4rem}.process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}.process article{border-top:1px solid #c9b9aa;padding-top:1.2rem}.process svg{color:#b77554;font-size:1.4rem}.process b{display:block;margin:1rem 0;color:#8b6c5e}.process h3{font-size:1rem}.process p{font-size:.82rem}.final-cta{max-width:none;width:100%;background:#1a1714;color:white;display:flex;justify-content:space-around;align-items:center;gap:3rem}.final-cta p{color:#cfc7bf;max-width:600px}.final-cta h2{font-size:clamp(2.5rem,5vw,4.8rem)}
+  @media(max-width:900px){.intro,.process{grid-template-columns:1fr}.services{grid-template-columns:1fr}.service-image{max-height:420px}.service-image img{min-height:0}.process-grid{grid-template-columns:repeat(2,1fr)}.project-grid{grid-template-columns:1fr 1fr}.project-grid a:last-child{grid-column:span 2;min-height:330px}.final-cta{align-items:flex-start;flex-direction:column}}
+  @media(max-width:600px){.hero{min-height:680px}.hero-shade{background:rgba(8,8,8,.7)}.intro-images{grid-template-columns:1fr}.intro-images img,.intro-images img:not(.large){height:280px}.project-grid{grid-template-columns:1fr}.project-grid a,.project-grid a:last-child{grid-column:auto;min-height:300px}.process-grid{grid-template-columns:1fr}.section-title{align-items:flex-start;flex-direction:column}}
 `
 
 export default Hero

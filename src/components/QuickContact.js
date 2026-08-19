@@ -47,7 +47,7 @@ const Wrapper = styled.aside`
     svg { font-size: 1.25rem; }
   }
   .whatsapp { background: #187b3f; }
-  .phone { background: var(--clr-grey-1); }
+  .phone { background: #b77554; }
   @media (max-width: 480px) {
     left: 0.75rem;
     right: 0.75rem;

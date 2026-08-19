@@ -11,9 +11,9 @@ Variables
 */
 
 :root {
-  --clr-primary-brown: #b08968;
-  --clr-secondary-brown: #ede0d4;
-  --clr-background-grey: #f3f4f6;
+  --clr-primary-brown: #b77554;
+  --clr-secondary-brown: #e8ddd2;
+  --clr-background-grey: #f4f1ec;
 
   /* lighter shades of primary color */
   --clr-primary-6: hsl(21, 57%, 50%);
@@ -43,8 +43,8 @@ Variables
   --light-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   --dark-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
   --border-bottom: 2px solid var(--clr-primary-brown);
-  --border-radius: 5px;
-  --max-width: 1560px;
+  --border-radius: 2px;
+  --max-width: 1440px;
 }
 /*
 ===============
@@ -64,7 +64,7 @@ body {
   color: var(--clr-grey-1);
   line-height: 1.5;
   font-size: 0.875rem;
-  font-family: -apple-system,"Poppins",sans-serif;
+  font-family: "Poppins",Arial,sans-serif;
   margin: 0rem auto;
 }
 :focus-visible {
@@ -97,6 +97,7 @@ h4 {
   line-height: 1.25;
   margin-bottom: 0.75rem;
 }
+h1,h2 { text-wrap: balance; }
 h1 {
   font-size: 2rem;
 }
